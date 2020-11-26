@@ -1,11 +1,7 @@
-const { MongoClient, ObjectID } = require('mongodb')
+const { MongoClient, ObjectId } = require('mongodb')
 
 const connectionURL = 'mongodb://127.0.0.1:27017'
 const databaseName = 'task-manager'
-
-const id = new ObjectID()
-console.log(id)
-console.log(id.getTimestamp())
 
 MongoClient.connect(
   connectionURL,
@@ -15,35 +11,31 @@ MongoClient.connect(
 
     const db = client.db(databaseName);
 
-    db.collection('users').insertOne({
-      _id: id,
-      name: "Nathan",
-      age: 6
-    }, (error, result) => {
-      if (error) {
-        return console.log('unable to insert user')
-      }
+    // db.collection("users").findOne(
+    //   { _id: new ObjectId("5fc00dedc31cfe3516de0016") },
+    //   (err, user) => {
+    //     if (err) return console.log("Unable to find user");
 
-      console.log(result.ops)
+    //     console.log(user);
+    //   }
+    // );
+
+    // db.collection('users').find({ age: 39 }).toArray((err, users) => {
+    //   console.log(users)
+    // })
+
+    // db.collection('users').find({ age: 39 }).count((err, count) => {
+    //   console.log(count)
+    // })
+
+    db.collection('tasks').findOne({
+      _id: new ObjectId("5fc0066aedaef333f9a542c8"),
+    }, (err, task) => {
+        console.log(task)
+    });
+
+    db.collection('tasks').find({ completed: true }).toArray((err, tasks) => {
+      console.log(tasks)
     })
-
-    // db.collection('users').insertMany([
-    //   { name: 'David', age: 40 },
-    //   { name: 'Adrien', age: 7 }
-    // ], (error, result) => {
-    //     if (error) return console.log('unable to insert multiple users')
-
-    //     console.log(result.ops)
-    // })
-
-    // db.collection('tasks').insertMany([
-    //   { description: 'buy bass', completed: true },
-    //   { description: 'tune bass', completed: true },
-    //   { description: 'learn songs', completed: false },
-    // ], (error, response) => {
-    //     if (error) return console.log('Unable to insert tasks')
-
-    //     console.log(response.ops)
-    // })
   }
 );
