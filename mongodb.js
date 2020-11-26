@@ -20,13 +20,19 @@ MongoClient.connect(
     // .then(data => console.log('end', data))
     // .catch(err => console.log(err))
 
-    db.collection('tasks').updateMany(
-      { completed: false },
-      {
-        $set: { completed: true }
-      }
-    )
-      .then(data => console.log(data.modifiedCount))
+    // db.collection('tasks').updateMany(
+    //   { completed: false },
+    //   {
+    //     $set: { completed: true }
+    //   }
+    // )
+    //   .then(data => console.log(data.modifiedCount))
+    //   .catch(err => console.log(err))
+
+    db.collection('users').deleteOne({
+      completed: true
+    })
+      .then(data => console.log(data.deletedCount))
       .catch(err => console.log(err))
   }
 );
