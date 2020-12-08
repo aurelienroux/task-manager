@@ -18,6 +18,7 @@ module.exports = {
     'func-names': 'off',
     'class-methods-use-this': 'off',
     'no-param-reassign': 'off',
+    'no-use-before-define': 'off',
     camelcase: 'off',
     'no-unused-vars': ['error', { argsIgnorePattern: 'next' }]
   }
